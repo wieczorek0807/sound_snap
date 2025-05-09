@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sound_snap/core/injection/injectable.dart';
 import 'package:sound_snap/core/presentation/screens/app_default_screen.dart';
+import 'package:sound_snap/core/presentation/values/values.dart';
 import 'package:sound_snap/features/transcription/presentation/cubits/transcription_cubit/transcription_cubit.dart';
 
 @RoutePage()
@@ -31,7 +32,7 @@ class TranscriptionScreen extends StatelessWidget {
               TranscriptionStateInitial() => const Center(child: Text('Rozpoczynam transkrypcję...')),
               TranscriptionStateLoading() => const Center(child: CircularProgressIndicator()),
               TranscriptionStateLoaded() => SingleChildScrollView(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: AppPadding.defaultPadding,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -39,7 +40,7 @@ class TranscriptionScreen extends StatelessWidget {
                         state.text,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppDimensions.gapMedium),
                       Text(
                         'Utworzono: ${_formatDate(state.createdAt)}',
                         style: Theme.of(context).textTheme.bodySmall,
@@ -52,7 +53,7 @@ class TranscriptionScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Wystąpił błąd: ${state.message}'),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppDimensions.gapMedium),
                       ElevatedButton(
                         onPressed: () {
                           context.read<TranscriptionCubit>().transcribeAudio(filePath);

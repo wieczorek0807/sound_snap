@@ -19,7 +19,7 @@ class TranscriptionRemoteDataSource with UiLoggy implements ITranscriptionRemote
   @override
   Future<Either<Failure, TranscriptionModel>> getTranscription(String audioPath) async {
     try {
-      // Symulacja opóźnienia sieci
+
       await Future.delayed(const Duration(seconds: 1));
 
       final randomIndex = DateTime.now().millisecondsSinceEpoch % _mockTranscriptions.length;
