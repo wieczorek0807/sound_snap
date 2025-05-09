@@ -4,7 +4,10 @@ import 'package:sound_snap/core/presentation/screens/app_default_screen.dart';
 
 @RoutePage()
 class TranscriptionScreen extends StatelessWidget {
-  const TranscriptionScreen({super.key});
+  const TranscriptionScreen({super.key, required this.recordId, required this.filePath});
+
+  final String recordId;
+  final String filePath;
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sound_snap/features/new_recording/presentation/new_recording_screen.dart';
 import 'package:sound_snap/features/recording_list/presentation/screens/recording_list_screen.dart';

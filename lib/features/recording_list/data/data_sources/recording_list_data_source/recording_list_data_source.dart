@@ -18,28 +18,28 @@ class RecordingListDataSource with UiLoggy implements IRecordingListLocalDataSou
         RecordingModel(
           id: 'rec_001',
           file_name: 'Daily_Meeting.mp3',
-          file_path: '/recordings/daily_meeting.mp3',
+          file_path: 'assets/audio/audio_1.mp3',
           duration: 900000,
           created_at: now.subtract(const Duration(days: 1)),
         ),
         RecordingModel(
           id: 'rec_002',
           file_name: 'Client_Call_ProjectX.mp3',
-          file_path: '/recordings/client_call.mp3',
+          file_path: 'assets/audio/audio_2.mp3',
           duration: 1800000,
           created_at: now.subtract(const Duration(days: 3)),
         ),
         RecordingModel(
           id: 'rec_003',
           file_name: 'Ideas_2024.mp3',
-          file_path: '/recordings/ideas.mp3',
+          file_path: 'assets/audio/audio_3.mp3',
           duration: 300000,
           created_at: now.subtract(const Duration(days: 5)),
         ),
         RecordingModel(
           id: 'rec_004',
           file_name: 'Interview_Backend.mp3',
-          file_path: '/recordings/interview.mp3',
+          file_path: 'assets/audio/audio_1.mp3',
           duration: 2700000,
           created_at: now.subtract(const Duration(days: 7)),
         )

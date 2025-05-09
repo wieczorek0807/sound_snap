@@ -1,20 +1,25 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'recording_model.freezed.dart';
 part 'recording_model.g.dart';
 
-@freezed
-class RecordingModel with _$RecordingModel {
-  const RecordingModel._();
-  const factory RecordingModel({
-    required String id,
-    required String file_name,
-    required String file_path,
-    required int duration,
-    required DateTime created_at,
-  }) = _RecordingModel;
+@JsonSerializable()
+class RecordingModel {
+  final String id;
+  final String file_name;
+  final String file_path;
+  final int duration;
+  final DateTime created_at;
+
+  const RecordingModel({
+    required this.id,
+    required this.file_name,
+    required this.file_path,
+    required this.duration,
+    required this.created_at,
+  });
 
   factory RecordingModel.fromJson(Map<String, dynamic> json) => _$RecordingModelFromJson(json);
+  Map<String, dynamic> toJson() => _$RecordingModelToJson(this);
 }

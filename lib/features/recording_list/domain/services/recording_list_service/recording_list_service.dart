@@ -4,7 +4,6 @@ import 'package:loggy/loggy.dart';
 import 'package:sound_snap/core/errors/failure.dart';
 import 'package:sound_snap/features/recording_list/data/repositories/recording_list_repository.dart';
 import 'package:sound_snap/features/recording_list/domain/entities/recording_entity/recording_entity.dart';
-import 'package:sound_snap/features/recording_list/domain/mappers/recording_mapper.dart';
 
 abstract interface class IRecordingListService {
   Future<Either<Failure, List<RecordingEntity>>> getRecordings();
@@ -26,7 +25,7 @@ class RecordingListService with UiLoggy implements IRecordingListService {
           return Left(failure);
         },
         (models) {
-          final entities = models.map(RecordingMapper.toEntity).toList();
+          final entities = models.map(RecordingEntity.fromModel).toList();
           loggy.info('Successfully mapped ${entities.length} recordings to entities');
           return Right(entities);
         },
