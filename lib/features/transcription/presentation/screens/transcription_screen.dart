@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sound_snap/core/injection/injectable.dart';
 import 'package:sound_snap/core/presentation/screens/app_default_screen.dart';
+import 'package:sound_snap/features/transcription/presentation/cubits/transcription_cubit/transcription_cubit.dart';
 
 @RoutePage()
 class TranscriptionScreen extends StatelessWidget {
@@ -9,24 +12,61 @@ class TranscriptionScreen extends StatelessWidget {
   final String recordId;
   final String filePath;
 
+  String _formatDate(DateTime date) {
+    return '${date.day.toString().padLeft(2, '0')}.'
+        '${date.month.toString().padLeft(2, '0')}.'
+        '${date.year} ${date.hour.toString().padLeft(2, '0')}:'
+        '${date.minute.toString().padLeft(2, '0')}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppDefaultScreen(
-      title: 'context.appLocalizations.notes,',
-      // body: BlocBuilder<NotesCubit, NotesState>(
-      //   builder: (context, state) {
-      //     return state.when(
-      //       initial: () => Text(context.appLocalizations.addFirstNote),
-      //       error: (message) =>
-      //           Text(context.appLocalizations.errorScreenMessage(message)),
-      //       loaded: (noteEntitiesList) =>
-      //           NotesList(noteEntities: noteEntitiesList),
-      //       loading: () => const CircularProgressIndicator(),
-      //     );
-      //   },
-      // ),
-      body: Placeholder(),
-      // floatingActionButton: const AddNoteFloatingActionButton(),
+      title: 'Transkrypcja',
+      body: BlocProvider(
+        create: (context) => getIt<TranscriptionCubit>()..transcribeAudio(filePath),
+        child: BlocBuilder<TranscriptionCubit, TranscriptionState>(
+          builder: (context, state) {
+            return switch (state) {
+              TranscriptionStateInitial() => const Center(child: Text('Rozpoczynam transkrypcję...')),
+              TranscriptionStateLoading() => const Center(child: CircularProgressIndicator()),
+              TranscriptionStateLoaded() => SingleChildScrollView(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        state.text,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Utworzono: ${_formatDate(state.createdAt)}',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+              TranscriptionStateError() => Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Wystąpił błąd: ${state.message}'),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          context.read<TranscriptionCubit>().transcribeAudio(filePath);
+                        },
+                        child: const Text('Spróbuj ponownie'),
+                      ),
+                    ],
+                  ),
+                ),
+              _ => const SizedBox.shrink(),
+            };
+          },
+        ),
+      ),
     );
   }
 }

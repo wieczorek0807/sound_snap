@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:loggy/loggy.dart';
 import 'package:sound_snap/features/audio_player/domain/services/audio_player_service.dart';
 import 'package:sound_snap/features/recording_list/domain/entities/recording_entity/recording_entity.dart';
-import 'package:sound_snap/features/recording_list/domain/services/recording_list_service/recording_list_service.dart';
+import 'package:sound_snap/features/recording_list/domain/services/recording_list_service.dart';
 
 part 'recording_list_cubit.freezed.dart';
 part 'recording_list_state.dart';

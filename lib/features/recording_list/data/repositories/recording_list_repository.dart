@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:loggy/loggy.dart';
 import 'package:sound_snap/core/errors/failure.dart';
-import 'package:sound_snap/features/recording_list/data/data_sources/recording_list_data_source/recording_list_data_source.dart';
+import 'package:sound_snap/features/recording_list/data/data_sources/recording_list_local_data_source.dart';
 import 'package:sound_snap/features/recording_list/data/models/recording_model/recording_model.dart';
 
 abstract interface class IRecordingListRepository {
@@ -11,7 +11,7 @@ abstract interface class IRecordingListRepository {
 
 @injectable
 class RecordingListRepository with UiLoggy implements IRecordingListRepository {
-  final RecordingListDataSource _dataSource;
+  final RecordingListLocalDataSource _dataSource;
 
   RecordingListRepository(this._dataSource);
 

@@ -9,7 +9,7 @@ abstract interface class IRecordingListLocalDataSource {
 }
 
 @injectable
-class RecordingListDataSource with UiLoggy implements IRecordingListLocalDataSource {
+class RecordingListLocalDataSource with UiLoggy implements IRecordingListLocalDataSource {
   @override
   Future<Either<Failure, List<RecordingModel>>> getRecordings() async {
     try {

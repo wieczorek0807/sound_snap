@@ -5,7 +5,7 @@ import 'package:sound_snap/core/injection/injectable.dart';
 import 'package:sound_snap/core/presentation/screens/app_default_screen.dart';
 import 'package:sound_snap/core/router/app_router.dart';
 import 'package:sound_snap/features/recording_list/domain/entities/recording_entity/recording_entity.dart';
-import 'package:sound_snap/features/recording_list/presentation/cubits/recording_list_cubit.dart';
+import 'package:sound_snap/features/recording_list/presentation/cubits/recording_list_cubit/recording_list_cubit.dart';
 
 @RoutePage()
 class RecordingListScreen extends StatelessWidget {
