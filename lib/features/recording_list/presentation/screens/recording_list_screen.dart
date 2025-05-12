@@ -57,7 +57,7 @@ class RecordingListScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         final recording = recordings[index];
         return Card(
-          margin: AppMargin.smallMargin ,
+          margin: AppMargin.smallMargin,
           child: ListTile(
             leading: IconButton(
               icon: Icon(
@@ -108,10 +108,10 @@ class RecordingListScreen extends StatelessWidget {
   }
 
   Widget _buildEmptyState(BuildContext context) {
-    return  Center(
+    return Center(
       child: Text(
         'Brak dostępnych nagrań',
-        style:  Theme.of(context).textTheme.bodyLarge,
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
     );
   }

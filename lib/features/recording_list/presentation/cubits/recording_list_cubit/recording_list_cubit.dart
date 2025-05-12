@@ -23,11 +23,13 @@ class RecordingListCubit extends Cubit<RecordingListState> with UiLoggy {
 
   void _setupPlayerStateListener() {
     _playerStateSubscription = _audioPlayerService.playerStateStream.listen((playerState) {
+      loggy.debug('Player state changed: ${playerState.processingState}, playing: ${playerState.playing}');
+      final currentState = state;
+      if (currentState is! RecordingListStateLoaded) return;
+
       if (playerState.processingState == ProcessingState.completed) {
-        final currentState = state;
-        if (currentState is RecordingListStateLoaded) {
-          emit(currentState.copyWith(currentlyPlayingId: null));
-        }
+        loggy.debug('Playback completed, clearing currentlyPlayingId');
+        emit(currentState.copyWith(currentlyPlayingId: null));
       }
     });
   }
@@ -55,14 +57,27 @@ class RecordingListCubit extends Cubit<RecordingListState> with UiLoggy {
       if (currentState is! RecordingListStateLoaded) return;
 
       if (currentState.currentlyPlayingId == recording.id) {
+        loggy.debug('Pausing current recording: ${recording.id}');
         await _audioPlayerService.pause();
         emit(currentState.copyWith(currentlyPlayingId: null));
       } else {
-        await _audioPlayerService.play(recording.filePath);
+        loggy.debug('Starting playback of recording: ${recording.id}');
+        if (currentState.currentlyPlayingId != null) {
+          loggy.debug('Stopping current playback before starting new one');
+          await _audioPlayerService.stop();
+        }
+
         emit(currentState.copyWith(currentlyPlayingId: recording.id));
+        await _audioPlayerService.play(recording.filePath);
+
+        loggy.debug('Playback started for recording: ${recording.id}');
       }
     } catch (e, stackTrace) {
       loggy.error('Error toggling playback: $e', e, stackTrace);
+      final currentState = state;
+      if (currentState is RecordingListStateLoaded) {
+        emit(currentState.copyWith(currentlyPlayingId: null));
+      }
       emit(RecordingListState.error('Failed to play recording: ${e.toString()}'));
     }
   }

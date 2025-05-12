@@ -20,7 +20,11 @@ class AudioPlayerService with UiLoggy implements IAudioPlayerService {
   @override
   Future<void> play(String filePath) async {
     try {
+      loggy.debug('Setting audio source: $filePath');
+      await _audioPlayer.stop();
       await _audioPlayer.setFilePath(filePath);
+      await _audioPlayer.load();
+      loggy.debug('Starting playback');
       await _audioPlayer.play();
       loggy.info('Started playing audio from: $filePath');
     } catch (e, stackTrace) {
