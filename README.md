@@ -1,16 +1,47 @@
-# sound_snap
+# Sound Snap
 
-A new Flutter project.
+A demo Flutter application showcasing audio recording, playback, and transcription features with mock implementations.
 
-## Getting Started
+## 🎯 Overview
 
-This project is a starting point for a Flutter application.
+Sound Snap is a demonstration project that implements a mock audio management system. It's designed to showcase:
+- Basic audio recording functionality
+- Audio playback with mock files
+- Mock transcription service
+- State management patterns
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Technologies
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Core Technologies
+- **Flutter** - UI framework
+- **FVM** - Flutter Version Management
+- **Bloc/Cubit** - State management
+- **Freezed** - Code generation for immutable models
+- **Injectable** - Dependency injection
+- **Just Audio** - Audio playback
+- **Loggy** - Logging system
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Architecture
+- Clean Architecture
+- Feature-first structure
+
+## 📸 Screenshots
+
+<p align="center">
+  <img src="assets/screenshots/recording_list.png" width="200" alt="Recording List">
+  <img src="assets/screenshots/new_recording.png" width="200" alt="New Recording">
+  <img src="assets/screenshots/transcription.png" width="200" alt="Transcription">
+</p>
+
+## ⚠️ Important Note
+
+This is a demonstration project with mock implementations. The following features are simulated:
+- Audio recording (uses mock files)
+- Audio playback (uses sample audio files)
+- Transcription (returns mock text)
+
+The application has been tested on:
+- Web (Chrome)
+
+
+
